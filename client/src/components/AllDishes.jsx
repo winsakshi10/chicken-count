@@ -9,10 +9,13 @@ const AllDishes = ({ selectedDish, onDelete }) => {
   const [years, setYears] = useState(1);
   const [frequency, setFrequency] = useState("");
   const [weight, setWeight] = useState("");
+  const [savedDishes, setSavedDishes] = useState([]);
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     // Reset the portion state when a new dish is selected
     setPortion("");
+    setWeight("");
     setQuantity(1);
     setFrequency("daily");
     setMonths(1);
@@ -26,8 +29,13 @@ const AllDishes = ({ selectedDish, onDelete }) => {
 
   const handlePortionChange = (e) => {
     setPortion(e.target.value);
-    console.log(e.target.value);
   };
+
+  useEffect(() => {
+    const wt = selectedDish.portions.find((p) => p.size === portion)?.weight;
+    setWeight(wt);
+    console.log(wt);
+  }, [portion, selectedDish.portions]);
 
   const handleMonthsChange = (event, newValue) => {
     setMonths(newValue);
@@ -48,18 +56,66 @@ const AllDishes = ({ selectedDish, onDelete }) => {
     onDelete(selectedDish);
   };
 
+  const handleUpdate = () => {};
+  const handleSave = () => {
+    let totalTime = 0;
+
+    if (frequency === "daily") {
+      totalTime = months * 30 + years * 365;
+    } else if (frequency === "weekly") {
+      totalTime = (months * 30 + years * 365) / 7;
+    } else if (frequency === "monthly") {
+      totalTime = months + years * 12;
+    }
+
+    const portionWeightPerUnit = weight * quantity;
+    const totalWeight = portionWeightPerUnit * totalTime;
+
+    const updatedDish = {
+      name: selectedDish.name,
+      portion: portion,
+      months: months,
+      years: years,
+      frequency: frequency,
+      weight: weight,
+      totalWeight: totalWeight,
+    };
+
+    console.log(updatedDish);
+    setSavedDishes((prevSavedDishes) => [...prevSavedDishes, updatedDish]);
+    setCollapsed(true);
+  };
+
   return (
     <div className="bg-white w-[70%] flex mx-auto mt-5 rounded-lg shadow-md p-5">
-      <div className="border-2 border-slate-200 w-full p-3 rounded-md">
+      <div
+        className={`border-2 border-slate-200 w-full p-3 rounded-md ${
+          collapsed ? "h-[60px]" : ""
+        }`}
+      >
         <div>
           <div className="flex justify-between">
             <p className="text-xs font-semibold text-gray-400">Dish 1 : </p>
-            <button
-              className="text-gray-400 font-bold text-sm hover:text-red-500"
-              onClick={handleDelete}
-            >
-              delete
-            </button>
+            <div className="flex gap-2">
+              <button
+                className="text-gray-400 font-bold text-sm hover:text-red-500"
+                onClick={handleUpdate}
+              >
+                Update
+              </button>
+              <button
+                className="text-gray-400 font-bold text-sm hover:text-red-500"
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+              <button
+                className="text-gray-400 font-bold text-sm hover:text-red-500"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+            </div>
           </div>
           <h2 className="my-3 font-bold text-2xl">{selectedDish.name}</h2>
         </div>
@@ -90,7 +146,7 @@ const AllDishes = ({ selectedDish, onDelete }) => {
               className="w-[50%] border border-slate-200 rounded-sm"
             >
               {selectedDish.portions.map((val, index) => (
-                <option key={index} value={JSON.stringify(val)}>
+                <option key={index} value={val.size}>
                   {val.size}
                 </option>
               ))}

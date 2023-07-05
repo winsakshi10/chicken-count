@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import AllDishes from "./AllDishes";
 
 const Search = ({ setSelectedDish }) => {
   const [searchTerm, setSearchTerm] = useState("");

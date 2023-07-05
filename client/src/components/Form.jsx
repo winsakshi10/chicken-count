@@ -10,38 +10,7 @@ const Form = () => {
     const updatedDishes = selectedDish.filter((myDish) => myDish !== dish);
     setSelectedDish(updatedDishes);
   };
-  const handleCalculate = () => {
-    let totalWeight = 0;
-
-    selectedDish.forEach((dish) => {
-      const { quantity, portion, frequency, months, years } = dish;
-
-      // Find the selected portion's weight
-      const selectedPortion = dish.portions.find((p) => p.size === portion);
-      console.log(selectedPortion);
-
-      const portionWeight = selectedPortion.weight;
-
-      let totalTime = 0;
-      if (frequency === "daily") {
-        totalTime = months * 30 + years * 365;
-      } else if (frequency === "weekly") {
-        totalTime = (months * 30 + years * 365) / 7;
-      } else if (frequency === "monthly") {
-        totalTime = months + years * 12;
-      }
-
-      // Calculate the total weight
-      const portionWeightPerUnit = portionWeight * quantity;
-      const totalWeightForDish = portionWeightPerUnit * totalTime;
-
-      // Accumulate the total weight
-      totalWeight += totalWeightForDish;
-    });
-
-    // Perform any desired action with the calculated totalWeight
-    console.log("Total weight of chicken eaten: ", totalWeight, "g");
-  };
+  const handleCalculate = () => {};
 
   return (
     <div className=" bg-red-300 min-h-screen">
