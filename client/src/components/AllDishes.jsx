@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 
-const AllDishes = ({ selectedDish, onDelete }) => {
+const AllDishes = () => {
   const [quantity, setQuantity] = useState(1);
   const [portion, setPortion] = useState("");
   const [months, setMonths] = useState(1);
@@ -11,6 +11,14 @@ const AllDishes = ({ selectedDish, onDelete }) => {
   const [weight, setWeight] = useState("");
   const [savedDishes, setSavedDishes] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
+
+  const selectedDish = {
+    name: "Tandoori Chicken",
+    portions: [
+      { size: "Full", measurement: "piece(s)", weight: 300 },
+      { size: "Half", measurement: "piece(s)", weight: 150 },
+    ],
+  };
 
   useEffect(() => {
     // Reset the portion state when a new dish is selected

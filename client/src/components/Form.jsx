@@ -1,6 +1,7 @@
 import { set } from "mongoose";
 import React, { useState } from "react";
 import AllDishes from "./AllDishes";
+import Popup from "./Popup";
 import Search from "./Search";
 
 const Form = () => {
@@ -13,8 +14,7 @@ const Form = () => {
   const handleCalculate = () => {};
 
   return (
-    <div className=" bg-red-300 min-h-screen">
-      <Search setSelectedDish={setSelectedDish} />
+    <div className="">
       <div className="bg-white w-[70%] flex mx-auto my-10 p-5 rounded-md flex-col">
         {selectedDish &&
           selectedDish.map((dish, index) => (

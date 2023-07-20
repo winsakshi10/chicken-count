@@ -1,0 +1,42 @@
+/* result.css */
+@keyframes fall {
+  0% {
+    transform: translateY(-300px);
+  }
+  100% {
+    transform: translateY(700px);
+  }
+}
+@keyframes static {
+  /* Define any static positions here, e.g., transform: translateY(600px); */
+}
+.falling-chicken {
+  width: 50px;
+  height: 50px;
+  background-image: url("../assets/chickenLeg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  animation: fall 2s ease-in-out forwards;
+}
+.falling-chicken.animation-end {
+  animation: none;
+  transform: translateY(600px);
+}
+.chicken-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Ensure the chickens don't interfere with clicks on other content */
+}
+.fallen-chicken {
+  animation: none; /* Remove animation for the fallen chicken class */
+  bottom: 0;
+  position: absolute; /* Change the position to absolute to stay at the bottom */
+  transform: translateY(
+    700px
+  ); /* Set the translateY value to 0 to stay at the bottom */
+}

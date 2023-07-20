@@ -1,0 +1,56 @@
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  /* Styles for popup content */
+}
+
+.marquee-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-icons {
+  display: flex;
+  animation: marquee-animation 30s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 50px; /* Adjust the value to spread icons apart */
+  flex-shrink: 0;
+  animation: marquee-icon-animation 2s linear infinite alternate;
+}
+
+@keyframes marquee-animation {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-icon-animation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}

@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Open Sans", "ui-sans-serif", "system-ui"],
-        display: ["Bubblegum Sans", "ui-sans-serif", "system-ui"],
+        sans: ["Source Serif 4", "ui-sans-serif", "system-ui"],
+        display: ["Fredoka", "ui-sans-serif", "system-ui"],
       },
       focus: true,
     },
